@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import RegisterPage from './pages/RegisterPage'
@@ -9,6 +10,7 @@ import CreateAdPage from './pages/CreateAdPage'
 import EditAdPage from './pages/EditAdPage'
 import WishlistPage from './pages/WishlistPage'
 import MainLayout from './layout/MainLayout'
+
 
 
 const App = () => {
