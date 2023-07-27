@@ -55,12 +55,19 @@ footer {
     align-items: center;
     justify-content: center;
     background-color: #dadada;
+    position: fixed;
+    bottom: 0;
 
 }
 .footer-text{
     font-size: 14px;
     font-weight: 300;
     text-align: center;
+}
+@media only screen and (max-width: 800px) {
+    footer {
+        display: none;
+    }
 }
 /* 
 *   REGISTER PAGE
