@@ -10,19 +10,20 @@ import { storage } from "../../FirebaseConfig";
 import alert from "../utility/alert";
 import { Navigate } from "react-router-dom";
 
-const descDefaultVal = `Type: House/Apartment/Condo/Villa/Other
-Bedrooms: 
-Bathrooms: 
-Furnishing: Non/Semi/Fully Furnished
-Listed by: 
+const descDefaultVal = 
+`Property Type: House/Apartment/Condo/Villa/Other
+Facing: North/East/West/South
+How Many Bedrooms?: 
+How Many Bathrooms?: 
+Furnishing: Non/Semi/Fully Furnished 
 Super Built up area (ft²): 
 Carpet Area (ft²): 
-Bachelors Allowed: 
-Maintenance (Monthly): 
-Total Floors: 
-Floor No: 
 Car Parking: Yes/No
-Facing: North/East/West/South
+Maintenance (Monthly/Yearly): 
+Total Floors: 
+Floor No (For Rent):
+Bachelors Allowed: Yes/No 
+Listed by:
 Project Name: `;
 
 const CreateAdPage = () => {
@@ -56,15 +57,15 @@ const CreateAdPage = () => {
     const descriptionVal = description.current.value;
     const listTypeVal = listType.current;
 
-    if (titleVal.length < 5 || titleVal.length > 100) {
-      alert('title length should be greater than equals to 5 and less equals to 100 characters', 'error')
+    if (titleVal.length < 3 || titleVal.length > 100) {
+      alert('title length should be greater than equals to 3 and less equals to 100 characters', 'error')
       return
     }
     if (locationVal.length < 3 || locationVal.length > 100) {
       alert('location length should be greater than equals to 3 and less equals to 100 characters', 'error')
       return
     }
-    if (priceVal < 0 || priceVal > 1000000000) {
+    if (priceVal < 0 || priceVal > 100000000000) {
       alert('price should be greater than 0 and less than 100,00,00,000', 'error')
       return
     }
@@ -135,7 +136,8 @@ const CreateAdPage = () => {
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
+              name="row-radio-buttons-group" onChange={event => { listType.current = event.target.value }}
+              
             >
               <FormControlLabel value="RENT" control={<Radio />} label="Rent"/>
               <FormControlLabel value="SELL" control={<Radio />} label="Sell" />

@@ -2,6 +2,8 @@
 * HEADER
 */
 header {
+    position: sticky;
+    top: 0;
     height: 60px;
     background-color: #fff;
     padding: 0 10px;
@@ -156,7 +158,7 @@ footer {
     flex-wrap: wrap;
 }
 .item-card-container {
-    width: 33.33%;
+    width: 25%;
     padding: 10px;
 }
 .item-card {
@@ -180,6 +182,50 @@ footer {
     object-fit: cover;
     object-position: center;
 }
-.img-card-body, .img-card-footer {
+.img-card-body {
     padding:  8px;
+}
+.img-card-price {
+    font-size: 22px;
+    font-weight: 500;
+}
+.img-card-title {
+    color: #666;
+    font-size: 14px;
+}
+.img-card-row-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+.img-card-location {
+    color: #666;
+    font-size: 12px;
+}
+.img-card-footer {
+    padding: 0 8px 8px 8px ;
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-weight: 300;
+    font-size: 10px;
+}
+@media only screen and (max-width: 1200px) {
+    .item-card-container {
+        width: 33.33%;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .item-card-container {
+        width: 50%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .item-card-container {
+        width: 100%;
+    }
+}
+.next-page {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }
