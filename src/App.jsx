@@ -10,7 +10,7 @@ import CreateAdPage from './pages/CreateAdPage'
 import EditAdPage from './pages/EditAdPage'
 import WishlistPage from './pages/WishlistPage'
 import MainLayout from './layout/MainLayout'
-
+import ItemDetailPage from './pages/ItemDetailPage'
 
 
 const App = () => {
@@ -22,6 +22,7 @@ const App = () => {
 <Route path = '/Login' element={<LoginPage/>}/>
 <Route path = '/create-ad' element={<CreateAdPage/>}/>
 <Route path = '/Profile' element={<ProfilePage/>}/>
+<Route path='/item/:itemId' element={<ItemDetailPage />} />
 <Route path = '*' element={<NotFound404/>}/>
 </Route>
     </Routes>

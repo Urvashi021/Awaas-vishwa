@@ -1,6 +1,8 @@
 import React from "react";
 import { itemDateFormatter } from "../utility/DateUtils";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { numberToCommaString } from "../utility/numberUtils";
 
 const HomePage = () => {
   const [itemList, setItemList] = React.useState([]);
@@ -65,6 +67,7 @@ const ItemCard = ({
 }) => {
   return (
     <div className="item-card-container">
+       <Link to={`/item/${id}`}>
       <div className="item-card">
         <div className="item-card-imgs">
           {
@@ -77,7 +80,7 @@ const ItemCard = ({
           }
         </div>
         <div className="img-card-body">
-          <div className="img-card-price">₹ {price}</div>
+          <div className="img-card-price">₹ {numberToCommaString(price)}</div>
           <div className="img-card-title">{title}</div>
           <div className="img-card-location">{location}</div>
         </div>
@@ -86,6 +89,7 @@ const ItemCard = ({
           <div>{itemDateFormatter(createdAt)}</div>
         </div>
       </div>
+      </Link>
     </div>
   );
 };      
