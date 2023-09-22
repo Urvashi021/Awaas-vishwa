@@ -1,5 +1,5 @@
 export const itemDateFormatter = (rawDate) => {
-
+    
     // Parse ISO 8601 string
     const parsedDatetime = new Date(rawDate);
 

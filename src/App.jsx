@@ -23,6 +23,8 @@ const App = () => {
 <Route path = '/create-ad' element={<CreateAdPage/>}/>
 <Route path = '/Profile' element={<ProfilePage/>}/>
 <Route path='/item/:itemId' element={<ItemDetailPage />} />
+<Route path = '/Wishlist' element={<WishlistPage/>}/>
+
 <Route path = '*' element={<NotFound404/>}/>
 </Route>
     </Routes>

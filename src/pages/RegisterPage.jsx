@@ -1,10 +1,15 @@
 import React from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, IconButton, InputAdornment } from "@mui/material";
 import alert from "../utility/alert";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import Tooltip from '@mui/material/Tooltip';
 
 const RegisterPage = () => {
   const [redirect, setRedirect] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
   const name = React.useRef();
   const phone = React.useRef();
   const email = React.useRef();
@@ -56,7 +61,7 @@ if (redirect) {
               fullWidth
               id="filled-basic"
               label="Full Name"
-              variant="filled"
+              variant="outlined"
               inputRef={name}
               required
               autoComplete='true'
@@ -65,7 +70,7 @@ if (redirect) {
               fullWidth
               id="filled-basic"
               label="Phone"
-              variant="filled"
+              variant="outlined"
               type="number"
               inputRef={phone}
               required
@@ -74,8 +79,8 @@ if (redirect) {
             <TextField
               fullWidth
               id="filled-basic"
-              label="email"
-              variant="filled"
+              label="Email"
+              variant="outlined"
               inputRef={email}
               required
               autoComplete='true'
@@ -84,33 +89,62 @@ if (redirect) {
               fullWidth
               id="filled-basic"
               label="User Name"
-              variant="filled"
+              variant="outlined"
               inputRef={username}
               required
               autoComplete='true'
+              InputProps={{
+                endAdornment: (
+                  <Tooltip placement="top-start" title="First character should be alphabet [A-Za-z] and other characters can be alphabets, numbers or an underscore so, [A-Za-z0-9_]." arrow>
+                  <InputAdornment position="end">
+                    <InfoOutlinedIcon fontSize="small" />
+                  </InputAdornment>
+                  </Tooltip>
+                ),
+              }}
             />
             <TextField
               fullWidth
               id="filled-basic"
-              label="password"
-              variant="filled"
-              type="password"
+              label="Password"
+              variant="outlined"
+              type={showPassword ? 'text' : 'password'}
               inputRef={password}
               required
               autoComplete='true'
+              InputProps={{
+                endAdornment: (
+                  <Tooltip placement="top-start" title="Password should have minimum of eight characters, at least one uppercase letter, one lowercase letter, one number and one special character." arrow>
+                  <InputAdornment position="end">
+                    <IconButton fontSize="small"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                  </Tooltip>
+                ),
+              }}
             />
             <Button
               variant="contained"
               sx={{ marginTop: "20px", width: "100%" }}
               type="submit"
             >
-              Sign Up
+             <b> Sign Up </b>
             </Button>
+            <div className="register-link">
+              Already Have an Account ? 
+              <Link className="sign-up" to = "/Login">
+                 <b>  Login </b>
+                </Link>
+            </div>
           </form>
         </div>
       </div>
     </div>
   );
 };
-
+  
 export default RegisterPage;

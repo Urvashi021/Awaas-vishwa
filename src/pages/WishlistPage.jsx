@@ -3,9 +3,10 @@ import React from 'react'
 const WishlistPage = () => {
   return (
     <div>
-      WishlistPage
+      Wish list
     </div>
   )
 }
 
 export default WishlistPage
+

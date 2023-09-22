@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, IconButton, InputAdornment, Tooltip, } from "@mui/material";
 import alert from "../utility/alert";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 const LoginPage = () => {
-  const {setUserInfo} = React.useContext(UserContext);
+  const { setUserInfo } = React.useContext(UserContext);
   const [redirect, setRedirect] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false); // New state for password visibility
   const username = React.useRef();
   const password = React.useRef();
 
@@ -22,7 +26,7 @@ const LoginPage = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: usernameVal, 
+        username: usernameVal,
         password: passwordVal
       }),
       credentials: 'include',
@@ -52,32 +56,63 @@ const LoginPage = () => {
               fullWidth
               id="filled-basic"
               label="User Name"
-              variant="filled"
+              variant="outlined"
               inputRef={username}
               required
               autoComplete='true'
+              InputProps={{
+                endAdornment: (
+                  <Tooltip placement="top-start" title="First character should be alphabet [A-Za-z] and other characters can be alphabets, numbers or an underscore so, [A-Za-z0-9_]." arrow>
+                  <InputAdornment position="end">
+                    <InfoOutlinedIcon fontSize="small" />
+                  </InputAdornment>
+                  </Tooltip>
+                ),
+              }}
             />
             <TextField
               fullWidth
               id="filled-basic"
               label="Password"
-              variant="filled"
-              type="password"
+              variant="outlined"
+              type={showPassword ? 'text' : 'password'}
               inputRef={password}
               required
-              autoComplete='true'
+              autoComplete="off" // Change autoComplete to "off"
+              InputProps={{
+                endAdornment: (
+                  <Tooltip placement="top-start" title="Password should have minimum of eight characters, at least one uppercase letter, one lowercase letter, one number and one special character." arrow>
+                  <InputAdornment position="end">
+                    <IconButton fontSize="small"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                      aria-label="Toggle password visibility" // Label for accessibility
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                  </Tooltip>
+                ),
+              }}
             />
             <Button
               variant="contained"
               sx={{ marginTop: "20px", width: "100%" }}
               type="submit"
             >
-              Login
+            <b>  Login  </b>
             </Button>
+            <div className="register-link">
+              Create a New Account ? 
+              <Link className="sign-up" to = "/register">
+                 <b>  Sign Up </b>
+                </Link>
+            </div>
+            
           </form>
         </div>
       </div>
     </div>
   )
 }
-export default LoginPage
+export default LoginPage;
