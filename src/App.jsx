@@ -16,17 +16,17 @@ import ItemDetailPage from './pages/ItemDetailPage'
 const App = () => {
   return (
     <Routes>
-      <Route path ='/' element={<MainLayout/>}>
-<Route path = '/' element={<HomePage/>}/> 
-<Route path = '/register' element={<RegisterPage/>}/>
-<Route path = '/Login' element={<LoginPage/>}/>
-<Route path = '/create-ad' element={<CreateAdPage/>}/>
-<Route path = '/Profile' element={<ProfilePage/>}/>
-<Route path='/item/:itemId' element={<ItemDetailPage />} />
-<Route path = '/Wishlist' element={<WishlistPage/>}/>
-
-<Route path = '*' element={<NotFound404/>}/>
-</Route>
+      <Route path='/' element={<MainLayout />}>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/create-ad' element={<CreateAdPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/item/:itemId' element={<ItemDetailPage />} />
+        <Route path='/edit/:itemId' element={<EditAdPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='*' element={<NotFound404 />} />
+      </Route>
     </Routes>
   )
 }

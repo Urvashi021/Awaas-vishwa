@@ -39,7 +39,6 @@ const LoginPage = () => {
     } else {
       alert(data.error, 'error')
     }
-
   }
 
   if (redirect) {
@@ -63,9 +62,9 @@ const LoginPage = () => {
               InputProps={{
                 endAdornment: (
                   <Tooltip placement="top-start" title="First character should be alphabet [A-Za-z] and other characters can be alphabets, numbers or an underscore so, [A-Za-z0-9_]." arrow>
-                  <InputAdornment position="end">
-                    <InfoOutlinedIcon fontSize="small" />
-                  </InputAdornment>
+                    <InputAdornment position="end">
+                      <InfoOutlinedIcon fontSize="small" />
+                    </InputAdornment>
                   </Tooltip>
                 ),
               }}
@@ -82,15 +81,15 @@ const LoginPage = () => {
               InputProps={{
                 endAdornment: (
                   <Tooltip placement="top-start" title="Password should have minimum of eight characters, at least one uppercase letter, one lowercase letter, one number and one special character." arrow>
-                  <InputAdornment position="end">
-                    <IconButton fontSize="small"
-                      onClick={() => setShowPassword(!showPassword)}
-                      edge="end"
-                      aria-label="Toggle password visibility" // Label for accessibility
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
+                    <InputAdornment position="end">
+                      <IconButton fontSize="small"
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                        aria-label="Toggle password visibility" // Label for accessibility
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
                   </Tooltip>
                 ),
               }}
@@ -100,15 +99,15 @@ const LoginPage = () => {
               sx={{ marginTop: "20px", width: "100%" }}
               type="submit"
             >
-            <b>  Login  </b>
+              <b>  Login  </b>
             </Button>
-            <div className="register-link">
-              Create a New Account ? 
-              <Link className="sign-up" to = "/register">
-                 <b>  Sign Up </b>
-                </Link>
+            <div id="login-link">
+              Create a New Account ?
+              <Link className="login-btn" to="/register">
+                <b>  Sign Up </b>
+              </Link>
             </div>
-            
+
           </form>
         </div>
       </div>

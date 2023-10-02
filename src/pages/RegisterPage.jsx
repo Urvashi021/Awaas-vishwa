@@ -6,6 +6,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Tooltip from '@mui/material/Tooltip';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const RegisterPage = () => {
   const [redirect, setRedirect] = React.useState(false);
@@ -15,6 +16,7 @@ const RegisterPage = () => {
   const email = React.useRef();
   const username = React.useRef();
   const password = React.useRef();
+  const [verify, setVerify] = React.useState(false);
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
@@ -31,26 +33,36 @@ const RegisterPage = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: nameVal, 
-        phone: phoneVal, 
-        email: emailVal, 
-        username: usernameVal, 
+        name: nameVal,
+        phone: phoneVal,
+        email: emailVal,
+        username: usernameVal,
         password: passwordVal
       })
     })
-    
+
     const data = await response.json();
     //console.log(data);
-    if (response.ok){
+    if (response.ok) {
       alert('User Registered.', 'success')
-      setRedirect(true)    
+      setRedirect(true)
     } else {
       alert(data.error, 'error')
     }
   };
-if (redirect) {
-  return <Navigate to = {'/login'} />
-}
+  if (redirect) {
+    return <Navigate to={'/login'} />
+  }
+  const onChange = (value) => {
+    console.log("Captcha value:", value);
+    setVerify(true);
+  }
+
+  const recaptchaStyle = {
+    display: "inline-block",
+    width: "100%",
+    marginTop: "20px",
+  }
   return (
     <div className="register-page">
       <div className="register-container">
@@ -96,9 +108,9 @@ if (redirect) {
               InputProps={{
                 endAdornment: (
                   <Tooltip placement="top-start" title="First character should be alphabet [A-Za-z] and other characters can be alphabets, numbers or an underscore so, [A-Za-z0-9_]." arrow>
-                  <InputAdornment position="end">
-                    <InfoOutlinedIcon fontSize="small" />
-                  </InputAdornment>
+                    <InputAdornment position="end">
+                      <InfoOutlinedIcon fontSize="small" />
+                    </InputAdornment>
                   </Tooltip>
                 ),
               }}
@@ -115,30 +127,39 @@ if (redirect) {
               InputProps={{
                 endAdornment: (
                   <Tooltip placement="top-start" title="Password should have minimum of eight characters, at least one uppercase letter, one lowercase letter, one number and one special character." arrow>
-                  <InputAdornment position="end">
-                    <IconButton fontSize="small"
-                      onClick={() => setShowPassword(!showPassword)}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
+                    <InputAdornment position="end">
+                      <IconButton fontSize="small"
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
                   </Tooltip>
                 ),
               }}
             />
+            <div className="recaptchaContainer">
+              <ReCAPTCHA
+                sitekey={import.meta.env.VITE_RECAPTCHA_KEY}
+                onChange={onChange}
+                className="recaptcha"
+              />
+            </div>
             <Button
               variant="contained"
               sx={{ marginTop: "20px", width: "100%" }}
               type="submit"
+              className="signup-btn"
+              disabled={!verify}
             >
-             <b> Sign Up </b>
+              <b> Sign Up </b>
             </Button>
-            <div className="register-link">
-              Already Have an Account ? 
-              <Link className="sign-up" to = "/Login">
-                 <b>  Login </b>
-                </Link>
+            <div id="login-link">
+              Already Have an Account ?
+              <Link className="login-btn" to="/login">
+                <b>  Login </b>
+              </Link>
             </div>
           </form>
         </div>
@@ -146,5 +167,5 @@ if (redirect) {
     </div>
   );
 };
-  
+
 export default RegisterPage;
